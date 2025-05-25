@@ -79,6 +79,23 @@ act workflow_dispatch \
 
 - Safely debug changes
 
+# 🔧 Commands
+| 🔧 **Category**              | 🧪 **Command**                                                                         | 💬 **Description**                                                 |
+| ---------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| **Run default workflow**     | `act`                                                                                  | Runs default event (`push`) using default runner (`ubuntu-latest`) |
+| **Run specific event**       | `act pull_request`                                                                     | Simulates a `pull_request` event                                   |
+|                              | `act workflow_dispatch`                                                                | Simulates a `workflow_dispatch` (manual trigger)                   |
+| **Run specific job**         | `act -j terraform`                                                                     | Runs only the `terraform` job                                      |
+| **Use custom runner image**  | `act -P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-latest`                          | Uses a GitHub-hosted runner-like Docker image                      |
+| **Use secrets inline**       | `act -s GITHUB_TOKEN=mytoken -s ARM_CLIENT_ID=fake`                                    | Passes secrets directly in the command                             |
+| **Use secrets from file**    | `act --secret-file .secrets.dummy`                                                     | Loads secrets from a file                                          |
+| **Set env variables**        | `act --env DRY_RUN=true`                                                               | Sets environment variable `DRY_RUN=true`                           |
+| **Specify workflow file**    | `act -W .github/workflows/terraform.yml`                                               | Explicitly runs a specific workflow file                           |
+| **Verbose/debug mode**       | `act --verbose`                                                                        | Enables verbose output for debugging                               |
+| **Mount local volume**       | `act -v $(pwd):/github/workspace`                                                      | Mounts local working directory inside the container                |
+| **Run from Docker manually** | `docker run --rm -it -v $(pwd):/github/workspace your-act-image act workflow_dispatch` | Manually runs `act` from a Docker container                        |
+
+
 - Test from secure/self-hosted runners
 # 📚 Resources
 - [act GitHub Repo](https://github.com/nektos/act)
